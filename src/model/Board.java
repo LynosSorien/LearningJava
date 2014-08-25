@@ -25,6 +25,7 @@ public class Board implements CellListener{
     public Cell getCell(int index) {
         return board[index/3][index%3];
     }
+    public void place(int index, int agent) { getCell(index).putPiece(agent); }
 
     public List<Cell> getCellList() {
         ArrayList<Cell> cells = new ArrayList();
@@ -43,11 +44,19 @@ public class Board implements CellListener{
         String toReturn = new String("");
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
-                toReturn +="| " + board[i][j] + " |";
+                toReturn += "| " + board[i][j] + " |";
             }
-            if (i < board.length-1) toReturn+='\n';
+            if (i < board.length - 1) toReturn += '\n';
         }
         return toReturn;
+    }
+    
+    public int[][] getSimpleBoard() {
+        int[][] matrix = new int[3][3];
+        for (int i=0;i < board.length;i++)
+            for (int j =0;j<board[i].length;j++)
+                matrix[i][j] = board[i][j].getCellType();
+        return matrix;
     }
 
     @Override

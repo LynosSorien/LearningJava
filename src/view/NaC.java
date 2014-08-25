@@ -5,31 +5,39 @@ import model.Board;
 import model.Constants;
 import model.GameConfig;
 import model.model.lt.BoardListener;
-import model.model.lt.CellListener;
+import model.model.lt.TurnListener;
 
 import java.util.Scanner;
 
 /**
  * Created by david on 25/08/14.
  */
-public class NaC extends Thread
-    implements BoardListener {
+public class NaC
+    implements BoardListener, TurnListener {
     private Core core;
     private Scanner sc;
+    private boolean end;
 
     public NaC() {
         GameConfig.instance().configureStart(GameConfig.START_RANDOM);
         this.core = new Core();
         this.core.addListener(this);
+        this.end = false;
     }
 
-    @Override
-    public void run() {
+    public void start() {
         this.core.startGame();
         int choice = 0;
         sc = new Scanner(System.in);
         do {
-            choice = Integer.parseInt(sc.nextLine());
+            if (end) {
+                System.out.println("End? "+Constants.END_GAME);
+                choice = Integer.parseInt(sc.nextLine());
+                if (choice!=Constants.END_GAME) {
+                    this.end = false;
+                    this.core.startGame();
+                }
+            }
         }while(choice!= Constants.END_GAME);
     }
 
@@ -42,5 +50,16 @@ public class NaC extends Thread
         System.out.println("----------------NAC----------------");
         System.out.println(board);
         System.out.println("-----------------------------------");
+    }
+
+    @Override
+    public int onPlayerTurnEventListener(Board board) {
+        System.out.println("Player Turn, put the index of the cell");
+        return Integer.parseInt(sc.nextLine());
+    }
+
+    @Override
+    public void onEndStateEventListener(Board board) {
+        this.end = true;
     }
 }

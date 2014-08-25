@@ -30,6 +30,10 @@ public final class GameConfig extends Constants{
     }
 
     public int whoStarts() {
-        return whoStarts;
+        int start;
+        if (whoStarts == START_RANDOM) {
+            start = (int)Math.random();
+        } else start=whoStarts;
+        return (start<0) ? START_AGENT : START_PLAYER;
     }
 }
