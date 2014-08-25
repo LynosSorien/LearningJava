@@ -4,7 +4,7 @@ package controller;
  * Created by hell on 25/08/14.
  */
 public class PositionController {
-    public int CorrectPos(int num) {
+    public int correctPos(int num) {
         switch (num) {
             case 1:
                 System.out.println("1");
@@ -41,7 +41,7 @@ public class PositionController {
         return num;
     }
 
-    public int[][] MakePosition(int[][] matrix, int position, int player) {
+    public int[][] makePosition(int[][] matrix, int position, int player) {
         switch (position) {
             case 1:
                 matrix[0][0] = player;
@@ -73,7 +73,7 @@ public class PositionController {
         }
         return matrix;
     }
-    public boolean WinCheck(int[][]matrix){
+    public boolean winCheck(int[][]matrix){
         boolean winner=false;
 
         return winner;
