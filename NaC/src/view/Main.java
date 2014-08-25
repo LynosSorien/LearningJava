@@ -3,11 +3,14 @@ package view;
 import control.Control;
 
 public class Main {
-    public static Control ctrl;
-    
+    public Control ctrl;
+    public Main() {
+    	ctrl = new Control();
+    	ctrl.selectPiece(true);
+    }
+    	
 	public static void main(String[] args) {
-            ctrl = new Control();
-            ctrl.selectPiece(true);
+            new Main();
 	}
 
 }
