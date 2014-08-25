@@ -12,16 +12,20 @@ public class Player {
     //public String pieceType;
     private boolean piece;
     /**
-     * @param op False = Cross, Circle else.
+     * @param isCircle False = Cross, Circle else.
      */ 
-    public Player(boolean op){
+    public Player(boolean isCircle){
         /*if (op) this.pieceType = "O";
         else    this.pieceType = "X";*/
-        this.piece = op;
+        this.piece = isCircle;
     }
     
     public String getPieceType(){
         return piece ? "O" : "X";
+    }
+    
+    public void setPieceType(boolean isCircle){
+        this.piece = isCircle;
     }
     
     public boolean isCircle() { return piece; }

@@ -22,6 +22,15 @@ public class Control {
     public Control(){
         this.board = new Board();
     }
+    
+    /**
+     * 
+     * @param isCircle  is true = circle, else cross
+     */
+    public void selectPiece(boolean isCircle){
+        this.player = new Player(isCircle);
+        this.cpu = new Player(!isCircle);
+    }
 
     /**
      * 
@@ -33,6 +42,7 @@ public class Control {
     }
     
     public void setPlay(int row, int col){
-        //if (turn.player)    this.board.setPiece(i,j,);
+        if (turn.equals(TURN.player))    this.board.setPiece(row,col,player.getPieceType());
+        else    this.board.setPiece(row, col, cpu.getPieceType());
     }
 }
