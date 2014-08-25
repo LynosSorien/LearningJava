@@ -13,11 +13,11 @@ public class Piece {
     
     /**
      * 
-     * @param op IF this parameter value is false then the piece value will be
+     * @param isCircle IF this parameter value is false then the piece value will be
      * "X", otherwise it will be "O".
      */
-    public Piece(boolean op){
-        if (op) this.piece="O";
+    public Piece(boolean isCircle){
+        if (isCircle) this.piece="O";
         else    this.piece = "X";
     }
 }

@@ -15,7 +15,7 @@ public class Cell {
         this.piece = null;
     }
     
-    public void setCell(Piece p){
+    public void setPiece(Piece p){
         this.piece = p;
     }
     
