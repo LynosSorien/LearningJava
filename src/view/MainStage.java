@@ -22,7 +22,7 @@ public class MainStage{
         System.out.println("--2-Score Historic--\n");
         System.out.println("--3-How To Play--\n");
         System.out.println("--4-Exit--\n");
-        System.out.println("---------------Java Is OP!---------------\n");
+        System.out.println("-----------------Java Is OP!----------------\n");
         System.out.println("Insert Option: ");
         Scanner startScan=new Scanner(System.in);
         startnum = startScan.nextInt();
