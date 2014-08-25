@@ -45,4 +45,12 @@ public class Control {
         if (turn.equals(TURN.player))    this.board.setPiece(row,col,player.getPieceType());
         else    this.board.setPiece(row, col, cpu.getPieceType());
     }
+    
+    public String getBoard(){
+        return this.board.toString();
+    }
+    
+    public String getPieceType(){
+        return this.player.getPieceType();
+    }
 }

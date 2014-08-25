@@ -12,9 +12,10 @@ public class Board {
     private String[][] board;
     
     public Board () {
-        for (int i=0;i<2;i++)
-            for (int j=0;j<2;j++)
-                board[i][j] = "_";
+        board = new String[3][3];
+        for (int i=0;i<3;i++)
+            for (int j=0;j<3;j++)
+                board[i][j] = "-";
     }
 
     public void setPiece(int i, int j, String piece){
@@ -24,10 +25,11 @@ public class Board {
     @Override
     public String toString(){
         String b = "";
-        for (int i=0;i<2;i++)
-            for (int j=0;j<2;j++){
+        for (int i=0;i<3;i++)
+            for (int j=0;j<3;j++){
                 b += board[i][j];
-                if (i<3)b+="|";
+                if (j<2)b+="|";
+                else if (j==2)b+="\n";
             }
         return b;
     }
