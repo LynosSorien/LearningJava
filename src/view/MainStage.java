@@ -10,7 +10,7 @@ import java.io.IOException;
 public class MainStage{
 
 
-    public void StartScreen() {
+    public int StartScreen() {
         try {
             Runtime.getRuntime().exec("cls");
         } catch (IOException e) {
@@ -27,7 +27,7 @@ public class MainStage{
         Scanner startScan=new Scanner(System.in);
         startnum = startScan.nextInt();
         Selector(startnum);
-
+        return startnum;
 
 
     }
