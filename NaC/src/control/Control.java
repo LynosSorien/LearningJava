@@ -15,6 +15,7 @@ public class Control {
     private Board board;
     private Player player;
     private Player cpu;
+    private String winner;
     
     private enum TURN {player,cpu};
     private TURN turn;
@@ -67,9 +68,14 @@ public class Control {
         if (turn.equals(TURN.player))    this.board.setPiece(row,col,player.getPieceType());
         else    this.board.setPiece(row, col, cpu.getPieceType());
         finished = this.checkBoard();
-        System.out.println(finished);
         if (finished != -1){
             finish = true;
+            if (finished == 0)
+                System.out.println("The CPU has won the game");
+            else if (finished==1)
+                System.out.println("The player has won the game");
+            else if (finished==2)
+                System.out.println("The game ended in a draw");
         }else   this.changeTurn();
         return finish;
     }
@@ -82,53 +88,55 @@ public class Control {
     /**
      * 
      * @return if 1 the player have won, if 0 the winner is the cpu, else if -1
-     * the game is not finished.
+     * the game is not finished, else in case of draw it's value will be 2.
      */
     public int checkBoard(){
         String[] check = new String[3];
-        int winner = -1;
+        int win = -1;
         
         check = this.board.getRow(0);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
 
         check = this.board.getRow(1);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
         check = this.board.getRow(2);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
 
         check = this.board.getColumn(0);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
         check = this.board.getColumn(1);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
         check = this.board.getColumn(2);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
         check = this.board.getDiagonal(0);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
         check = this.board.getDiagonal(1);
         if (check[0].equals(check[1]) && check[1].equals(check[2]) && !check[0].equals("-"))
-            if (check[0].equals(this.player.getPieceType()))    winner = 1;
-            else    winner = 0;
+            if (check[0].equals(this.player.getPieceType()))    win = 1;
+            else    win = 0;
         
-        return winner;
+        if (this.board.isFull())win=2;
+        
+        return win;
     }
     
     public String getBoard(){

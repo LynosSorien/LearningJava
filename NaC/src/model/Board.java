@@ -66,6 +66,15 @@ public class Board {
         return ret;
     }
     
+    public boolean isFull(){
+        for (int i=0;i<3;i++){
+            for (int j=0;j<3;j++){
+                if (this.board[i][j].equals("-"))return false;
+            }
+        }
+        return true;
+    }
+    
     @Override
     public String toString(){
         String b = "";
