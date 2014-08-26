@@ -4,6 +4,7 @@ import control.Core;
 import model.Board;
 import model.Constants;
 import model.GameConfig;
+import model.VictoryConditions;
 import model.model.lt.BoardListener;
 import model.model.lt.TurnListener;
 
@@ -23,19 +24,26 @@ public class NaC
         this.core = new Core();
         this.core.addListener(this);
         this.end = false;
+        this.sc = new Scanner(System.in);
     }
 
     public void start() {
         this.core.startGame();
         int choice = 0;
-        sc = new Scanner(System.in);
         do {
             if (end) {
                 System.out.println("End? "+Constants.END_GAME);
                 choice = Integer.parseInt(sc.nextLine());
                 if (choice!=Constants.END_GAME) {
                     this.end = false;
-                    this.core.startGame();
+                    this.core.reload(this);
+                }
+            }
+            synchronized (this) {
+                try {
+                    wait(1000);
+                } catch (InterruptedException e) {
+                    System.err.println("Something happends while Class "+this.getClass()+"Wait");
                 }
             }
         }while(choice!= Constants.END_GAME);
@@ -61,5 +69,13 @@ public class NaC
     @Override
     public void onEndStateEventListener(Board board) {
         this.end = true;
+        System.out.println("The game has ended.");
+        if (VictoryConditions.hasVictory(board, Constants.START_AGENT)) {
+            System.out.println("The AI win, you loose!");
+        } else if (VictoryConditions.hasVictory(board, Constants.START_PLAYER)) {
+            System.out.println("Congratulations!, you win!");
+        } else {
+            System.out.println("No one win, is draw game!");
+        }
     }
 }

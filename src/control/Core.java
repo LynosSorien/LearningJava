@@ -16,11 +16,22 @@ public class Core extends Thread{
     private TurnListener listener;
 
     public Core() {
+        this.board = new Board();
     }
 
     public void startGame() {
-        this.board = new Board();
         this.start();
+    }
+
+    public void restartGame() {
+        this.board = new Board();
+        run();
+    }
+
+    public void reload(GameListener listener) {
+        this.board = new Board();
+        addListener(listener);
+        run();
     }
 
     public void addListener(GameListener listener) {
@@ -33,8 +44,15 @@ public class Core extends Thread{
         int turn = GameConfig.instance().whoStarts();
         int move;
         while(!VictoryConditions.endGameState(this.board)) {
+            System.out.println((int)(Math.random()*VictoryConditions
+                    .getPossibleActions(board)
+                    .size()));
             if (turn == Constants.START_AGENT) {
-                this.board.place(board.getCellList().get((int)Math.random()*board.getCellList().size()).index(),turn);
+                this.board.place(VictoryConditions.getPossibleActions(board)
+                        .get((int) (Math.random() * VictoryConditions
+                                .getPossibleActions(board)
+                                .size())),
+                        turn);
                 turn*=-1;
             } else {
                 move = this.listener.onPlayerTurnEventListener(board);
@@ -42,5 +60,6 @@ public class Core extends Thread{
                 turn*=-1;
             }
         }
+        this.listener.onEndStateEventListener(board);
     }
 }

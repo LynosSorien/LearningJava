@@ -5,7 +5,7 @@ package model;
  */
 public final class GameConfig extends Constants{
     private static GameConfig instance;
-    private static Object lock;
+    private static Object lock = new Object();
 
     private int whoStarts;
 

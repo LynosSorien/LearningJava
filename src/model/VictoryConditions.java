@@ -45,6 +45,7 @@ public final class VictoryConditions {
             count+=matrix[ij][ij];
             if (count == 3*agent) return true;
         }
+        count = 0;
         for (int ij = matrix.length-1; ij>=0; ij--) {
             count+=matrix[ij][ij];
             if (count == 3*agent) return true;
